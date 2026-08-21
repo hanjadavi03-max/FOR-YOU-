@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>For You ❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="you.css">
+</head>
+
+<body>
+
+  <!-- Background noise -->
+  <div class="noise"></div>
+
+  <!-- Floating hearts -->
+  <div id="hearts"></div>
+
+
+  <!-- =========================
+       INTRO SCREEN
+  ========================== -->
+
+  <div class="intro" id="intro">
+
+    <div class="intro-glow"></div>
+
+    <div class="intro-content">
+
+      <p class="eyebrow">
+        A little something made just for you
+      </p>
+
+      <h1>
+        Happy Birthday,
+        <br>
+        <span>My Favorite Person</span>
+      </h1>
+
+      <p class="intro-copy">
+        Some moments deserve more than a message.
+      </p>
+
+      <button class="cinema-btn" id="enterBtn">
+        <span>Begin the story</span>
+        <i>→</i>
+      </button>
+
+      <div class="scroll-hint">
+        tap to enter
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================
+       MAIN WEBSITE
+  ========================== -->
+
+  <main id="site" class="hidden">
+
+
+    <!-- HERO -->
+    <section class="hero section">
+
+      <div class="hero-orb orb-one"></div>
+      <div class="hero-orb orb-two"></div>
+
+      <div class="hero-content reveal">
+
+        <p class="eyebrow">
+          Chapter I · Today
+        </p>
+
+        <h2>
+          Today is about
+          <br>
+          <em>you.</em>
+        </h2>
+
+        <p class="lead">
+          The person who somehow makes ordinary days
+          feel a little more magical.
+        </p>
+
+        <button class="ghost-btn scroll-next">
+          Keep going <span>↓</span>
+        </button>
+
+      </div>
+
+      <div class="date-stamp">
+        22 · 11 · 2026
+      </div>
+
+    </section>
+
+
+    <!-- LETTER -->
+    <section class="letter section">
+
+      <div class="section-inner">
+
+        <div class="section-label reveal">
+          Chapter II · A letter
+        </div>
+
+        <div class="letter-card reveal">
+
+          <div class="seal">
+            ♥
+          </div>
+
+          <p class="letter-kicker">
+            Dear birthday girl,
+          </p>
+
+          <p class="letter-text">
+            If I could bottle up every laugh, every little
+            memory, and every moment that made me smile
+            because of you, I would give you the whole
+            collection today.
+          </p>
+
+          <p class="letter-text">
+            You deserve a year filled with beautiful surprises,
+            peaceful mornings, ridiculous laughter, big dreams,
+            and people who remind you how special you are.
+          </p>
+
+          <p class="signature">
+            With all my heart,
+            <br>
+            <span>Your favorite solu ♡</span>
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MEMORIES -->
+    <section class="memories section">
+
+      <div class="section-inner">
+
+        <div class="section-label reveal">
+          Chapter III · Our little universe
+        </div>
+
+        <div class="memory-heading reveal">
+
+          <h2>
+            Moments worth
+            <br>
+            <em>keeping.</em>
+          </h2>
+
+            <p>
+                A few of my favorite memories with you.
+
+        </div>
+
+
+        <div class="gallery">
+
+          <!-- PHOTO 1 -->
+          <article class="memory-card large reveal">
+
+            <div class="photo-placeholder">
+
+             
+              <img src="img 1.jpeg" alt="Our memory">
+              
+
+              <span>
+                YOUR PHOTO
+              </span>
+
+              <small>
+                Replace with memory 01
+              </small>
+
+            </div>
+
+            <div class="memory-caption">
+              The day everything felt easy.
+            </div>
+
+          </article>
+
+
+          <!-- PHOTO 2 -->
+          <article class="memory-card reveal">
+
+            <div class="photo-placeholder">
+
+                 <img src="img 2.jpeg" alt="Our memory">
+
+              <span>
+                YOUR PHOTO
+              </span>
+
+              <small>
+                Replace with memory 02
+              </small>
+
+            </div>
+
+            <div class="memory-caption">
+              A moment I'd replay.
+            </div>
+
+          </article>
+
+
+          <!-- PHOTO 3 -->
+          <article class="memory-card reveal">
+
+            <div class="photo-placeholder">
+
+                 <img src="img 3.jpeg" alt="Our memory">
+
+              <span>
+                YOUR PHOTO
+              </span>
+
+              <small>
+                Replace with memory 03
+              </small>
+
+            </div>
+
+            <div class="memory-caption">
+              Just us being us.
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- BIRTHDAY CAKE -->
+    <section class="cake-section section">
+
+      <div class="section-inner cake-layout">
+
+        <div class="section-label reveal">
+          Chapter IV · Make a wish
+        </div>
+
+        <div class="cake-copy reveal">
+
+          <p class="eyebrow">
+            One tiny tradition
+          </p>
+
+          <h2>
+            Close your eyes.
+            <br>
+            <em>Make a wish.</em>
+          </h2>
+
+          <p>
+            Tap the candle when you're ready.
+          </p>
+
+        </div>
+
+
+        <div class="cake-stage reveal">
+
+          <div class="cake">
+
+            <div class="flame" id="flame"></div>
+
+            <div class="wick"></div>
+
+            <div class="candle"></div>
+
+            <div class="cake-top"></div>
+
+            <div class="cake-body"></div>
+
+            <div class="plate"></div>
+
+          </div>
+
+          <button class="wish-btn" id="wishBtn">
+            Make the wish ✨
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+    <section class="final section">
+
+      <div class="final-glow"></div>
+
+      <div class="final-content reveal">
+
+        <p class="eyebrow">
+          Final chapter
+        </p>
+
+        <h2>
+          Here's to another
+          <br>
+          <em>beautiful year.</em>
+        </h2>
+
+        <p class="final-message">
+
+          May this year surprise you in all the right ways.
+          <br>
+          And may you always remember how loved you are.
+
+        </p>
+
+        <div class="big-heart">
+          ♥
+        </div>
+
+        <p class="tiny">
+          Happy Birthday, beautiful.
+        </p>
+
+        <button class="replay-btn" id="replayBtn">
+          Replay the story ↗
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- MUSIC -->
+  <div class="music-control" id="musicControl">
+
+    <span class="music-dot"></span>
+
+    <span id="musicText">
+      Music
+    </span>
+
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="song.mpeg" type="audio/mpeg">
+</audio>
+
+
+  <script src="you.js"></script>
+
+</body>
+</html>
