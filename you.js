@@ -1,320 +1,376 @@
-/* =================================
-   ELEMENTS
-================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const intro = document.getElementById("intro");
+  <title>For You ❤️</title>
 
-const site = document.getElementById("site");
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-const enterBtn = document.getElementById("enterBtn");
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-const hearts = document.getElementById("hearts");
+  <link rel="stylesheet" href="you.css">
+</head>
 
-const wishBtn = document.getElementById("wishBtn");
+<body>
 
-const flame = document.getElementById("flame");
+  <!-- Background noise -->
+  <div class="noise"></div>
 
-const replayBtn = document.getElementById("replayBtn");
+  <!-- Floating hearts -->
+  <div id="hearts"></div>
 
-const musicControl =
-  document.getElementById("musicControl");
 
-const musicText =
-  document.getElementById("musicText");
+  <!-- =========================
+       INTRO SCREEN
+  ========================== -->
 
-const bgMusic =
-  document.getElementById("bgMusic");
+  <div class="intro" id="intro">
 
+    <div class="intro-glow"></div>
 
-/* =================================
-   ENTER WEBSITE
-================================= */
+    <div class="intro-content">
 
-enterBtn.addEventListener("click", () => {
+      <p class="eyebrow">
+        A little something made just for you
+      </p>
 
-  intro.classList.add("exit");
+      <h1>
+        Happy Birthday,
+        <br>
+        <span>My Favorite Person</span>
+      </h1>
 
-  /* Start background music */
-  bgMusic.volume = 0.35;
+      <p class="intro-copy">
+        Some moments deserve more than a message.
+      </p>
 
-  bgMusic.play()
-    .then(() => {
+      <button class="cinema-btn" id="enterBtn">
+        <span>Begin the story</span>
+        <i>→</i>
+      </button>
 
-      musicControl.classList.add("playing");
-      musicText.textContent = "Playing";
+      <div class="scroll-hint">
+        tap to enter
+      </div>
 
-    })
-    .catch(() => {
+    </div>
+  </div>
 
-      musicText.textContent = "Music";
 
-    });
+  <!-- =========================
+       MAIN WEBSITE
+  ========================== -->
 
+  <main id="site" class="hidden">
 
-  setTimeout(() => {
 
-    intro.style.display = "none";
+    <!-- HERO -->
+    <section class="hero section">
 
-    site.classList.remove("hidden");
+      <div class="hero-orb orb-one"></div>
+      <div class="hero-orb orb-two"></div>
 
-    window.scrollTo(0, 0);
+      <div class="hero-content reveal">
 
-    observeReveals();
+        <p class="eyebrow">
+          Chapter I · Today
+        </p>
 
-    burstHearts(20);
+        <h2>
+          Today is about
+          <br>
+          <em>you.</em>
+        </h2>
 
-  }, 850);
+        <p class="lead">
+          The person who somehow makes ordinary days
+          feel a little more magical.
+        </p>
 
-});
+        <button class="ghost-btn scroll-next">
+          Keep going <span>↓</span>
+        </button>
 
+      </div>
 
-/* =================================
-   SCROLL BUTTON
-================================= */
+      <div class="date-stamp">
+        22 · 11 · 2026
+      </div>
 
-document
-  .querySelector(".scroll-next")
-  .addEventListener("click", () => {
+    </section>
 
-    document
-      .querySelector(".letter")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
 
-  });
+    <!-- LETTER -->
+    <section class="letter section">
 
+      <div class="section-inner">
 
-/* =================================
-   SCROLL REVEAL
-================================= */
+        <div class="section-label reveal">
+          Chapter II · A letter
+        </div>
 
-function observeReveals() {
+        <div class="letter-card reveal">
 
-  const observer =
-    new IntersectionObserver(
-      entries => {
+          <div class="seal">
+            ♥
+          </div>
 
-        entries.forEach(entry => {
+          <p class="letter-kicker">
+            Dear birthday girl,
+          </p>
 
-          if (entry.isIntersecting) {
+          <p class="letter-text">
+            If I could bottle up every laugh, every little
+            memory, and every moment that made me smile
+            because of you, I would give you the whole
+            collection today.
+          </p>
 
-            entry.target
-              .classList
-              .add("visible");
+          <p class="letter-text">
+            You deserve a year filled with beautiful surprises,
+            peaceful mornings, ridiculous laughter, big dreams,
+            and people who remind you how special you are.
+          </p>
 
-          }
+          <p class="signature">
+            With all my heart,
+            <br>
+            <span>Your favorite soul ♡</span>
+          </p>
 
-        });
+        </div>
 
-      },
-      {
-        threshold: 0.16
-      }
-    );
+      </div>
 
+    </section>
 
-  document
-    .querySelectorAll(".reveal")
-    .forEach(element => {
 
-      observer.observe(element);
+    <!-- MEMORIES -->
+    <section class="memories section">
 
-    });
+      <div class="section-inner">
 
-}
+        <div class="section-label reveal">
+          Chapter III · Our little universe
+        </div>
 
+        <div class="memory-heading reveal">
 
-observeReveals();
+          <h2>
+            Moments worth
+            <br>
+            <em>keeping.</em>
+          </h2>
 
+            <p>
+                A few of my favorite memories with you.
 
-/* =================================
-   FLOATING HEARTS
-================================= */
+        </div>
 
-function burstHearts(amount = 10) {
 
-  for (let i = 0; i < amount; i++) {
+        <div class="gallery">
 
-    const heart =
-      document.createElement("span");
+          <!-- PHOTO 1 -->
+          <article class="memory-card large reveal">
 
-    heart.className =
-      "heart-particle";
+            <div class="photo-placeholder">
 
-    heart.textContent =
-      Math.random() > .25
-        ? "♥"
-        : "✦";
+             
+              <img src="img 1.jpeg" alt="Our memory">
+              
 
-    heart.style.left =
-      Math.random() * 100 + "%";
+              <span>
+                YOUR PHOTO
+              </span>
 
-    heart.style.bottom =
-      (-10 - Math.random() * 15) + "px";
+              <small>
+                Replace with memory 01
+              </small>
 
-    heart.style.setProperty(
-      "--drift",
-      (Math.random() * 180 - 90) + "px"
-    );
+            </div>
 
-    heart.style.animationDelay =
-      Math.random() * .7 + "s";
+            <div class="memory-caption">
+              The day everything felt easy.
+            </div>
 
-    heart.style.fontSize =
-      8 + Math.random() * 15 + "px";
+          </article>
 
-    hearts.appendChild(heart);
 
+          <!-- PHOTO 2 -->
+          <article class="memory-card reveal">
 
-    setTimeout(() => {
+            <div class="photo-placeholder">
 
-      heart.remove();
+                 <img src="img 2.jpeg" alt="Our memory">
 
-    }, 5000);
+              <span>
+                YOUR PHOTO
+              </span>
 
-  }
+              <small>
+                Replace with memory 02
+              </small>
 
-}
+            </div>
 
+            <div class="memory-caption">
+              A unforgatable moment
+            </div>
 
-/* Small hearts occasionally */
+          </article>
 
-setInterval(() => {
 
-  if (
-    !document.hidden &&
-    !intro.classList.contains("exit")
-  ) {
+          <!-- PHOTO 3 -->
+          <article class="memory-card reveal">
 
-    burstHearts(1);
+            <div class="photo-placeholder">
 
-  }
+                 <img src="img 3.jpeg" alt="Our memory">
 
-}, 900);
+              <span>
+                YOUR PHOTO
+              </span>
 
+              <small>
+                Replace with memory 03
+              </small>
 
-/* =================================
-   BIRTHDAY WISH
-================================= */
+            </div>
 
-wishBtn.addEventListener("click", () => {
+            <div class="memory-caption">
+              Just us being us.
+            </div>
 
-  if (
-    wishBtn.classList.contains("done")
-  ) {
+          </article>
 
-    return;
+        </div>
 
-  }
+      </div>
 
+    </section>
 
-  /* Turn off candle */
 
-  flame.style.display = "none";
+    <!-- BIRTHDAY CAKE -->
+    <section class="cake-section section">
 
+      <div class="section-inner cake-layout">
 
-  /* Change button */
+        <div class="section-label reveal">
+          Chapter IV · Make a wish
+        </div>
 
-  wishBtn.textContent =
-    "Wish made ✨";
+        <div class="cake-copy reveal">
 
-  wishBtn.classList.add("done");
+          <p class="eyebrow">
+            One tiny tradition
+          </p>
 
+          <h2>
+            Close your eyes.
+            <br>
+            <em>Make a wish.</em>
+          </h2>
 
-  /* Celebration */
+          <p>
+            Tap the candle when you're ready.
+          </p>
 
-  burstHearts(50);
+        </div>
 
 
-  /* Go to final section */
+        <div class="cake-stage reveal">
 
-  setTimeout(() => {
+          <div class="cake">
 
-    document
-      .querySelector(".final")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
+            <div class="flame" id="flame"></div>
 
-  }, 1400);
+            <div class="wick"></div>
 
-});
+            <div class="candle"></div>
 
+            <div class="cake-top"></div>
 
-/* =================================
-   REPLAY
-================================= */
+            <div class="cake-body"></div>
 
-replayBtn.addEventListener("click", () => {
+            <div class="plate"></div>
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+          </div>
 
+          <button class="wish-btn" id="wishBtn">
+            Make the wish ✨
+          </button>
 
-  setTimeout(() => {
+        </div>
 
-    location.reload();
+      </div>
 
-  }, 700);
+    </section>
 
-});
 
+    <!-- FINAL -->
+    <section class="final section">
 
-/* =================================
-   MUSIC
-================================= */
+      <div class="final-glow"></div>
 
-musicControl.addEventListener(
-  "click",
-  async () => {
+      <div class="final-content reveal">
 
-    try {
+        <p class="eyebrow">
+          Final chapter
+        </p>
 
-      if (bgMusic.paused) {
+        <h2>
+          Here's to another
+          <br>
+          <em>beautiful year.</em>
+        </h2>
 
-        await bgMusic.play();
+        <p class="final-message">
 
-        musicControl
-          .classList
-          .add("playing");
+          May this year surprise you in all the right ways.
+          <br>
+          And may you always remember how loved you are.
 
-        musicText.textContent =
-          "Playing";
+        </p>
 
-      }
+        <div class="big-heart">
+          ♥
+        </div>
 
-      else {
+        <p class="tiny">
+          Happy Birthday, beautiful.
+        </p>
 
-        bgMusic.pause();
+        <button class="replay-btn" id="replayBtn">
+          Replay the story ↗
+        </button>
 
-        musicControl
-          .classList
-          .remove("playing");
+      </div>
 
-        musicText.textContent =
-          "Music";
+    </section>
 
-      }
+  </main>
 
-    }
 
-    catch (error) {
+  <!-- MUSIC -->
+  <div class="music-control" id="musicControl">
 
-    musicText.textContent =
-  "Add song.mpeg";
+    <span class="music-dot"></span>
 
+    <span id="musicText">
+      Music
+    </span>
 
-      setTimeout(() => {
+  </div>
 
-        musicText.textContent =
-          "Music";
+  <audio id="bgMusic" loop>
+    <source src="song.mpeg" type="audio/mpeg">
+</audio>
 
-      }, 2500);
 
-    }
+  <script src="you.js"></script>
 
-  }
-);
+</body>
+</html>
