@@ -304,7 +304,7 @@ musicControl.addEventListener(
     catch (error) {
 
     musicText.textContent =
-  "Add song.mpeg";
+  "Add song.mp3";
 
 
       setTimeout(() => {
