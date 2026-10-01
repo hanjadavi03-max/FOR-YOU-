@@ -3,7 +3,6 @@
 ================================= */
 
 const intro = document.getElementById("intro");
-
 const site = document.getElementById("site");
 
 const enterBtn = document.getElementById("enterBtn");
@@ -11,7 +10,6 @@ const enterBtn = document.getElementById("enterBtn");
 const hearts = document.getElementById("hearts");
 
 const wishBtn = document.getElementById("wishBtn");
-
 const flame = document.getElementById("flame");
 
 const replayBtn = document.getElementById("replayBtn");
@@ -27,29 +25,90 @@ const bgMusic =
 
 
 /* =================================
+   MUSIC SETTINGS
+================================= */
+
+bgMusic.volume = 0.35;
+bgMusic.loop = true;
+
+
+/* =================================
+   MUSIC ERROR CHECK
+================================= */
+
+bgMusic.addEventListener("error", () => {
+
+  console.error(
+    "Music could not be loaded.",
+    bgMusic.error
+  );
+
+  musicText.textContent = "Music Error";
+
+});
+
+
+/* =================================
+   MUSIC LOADED
+================================= */
+
+bgMusic.addEventListener("canplaythrough", () => {
+
+  console.log("Music is ready.");
+
+});
+
+
+/* =================================
+   PLAY MUSIC FUNCTION
+================================= */
+
+async function playMusic() {
+
+  try {
+
+    bgMusic.volume = 0.35;
+
+    await bgMusic.play();
+
+    musicControl.classList.add("playing");
+
+    musicText.textContent = "Playing";
+
+    console.log("Music started successfully.");
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Music could not start:",
+      error
+    );
+
+    musicText.textContent = "Music";
+
+  }
+
+}
+
+
+/* =================================
    ENTER WEBSITE
 ================================= */
 
-enterBtn.addEventListener("click", () => {
+enterBtn.addEventListener("click", async () => {
+
+  /* Start music from the button click */
+  await playMusic();
+
+
+  /* Intro animation */
 
   intro.classList.add("exit");
 
-  /* Start background music */
-  bgMusic.volume = 0.35;
 
-  bgMusic.play()
-    .then(() => {
-
-      musicControl.classList.add("playing");
-      musicText.textContent = "Playing";
-
-    })
-    .catch(() => {
-
-      musicText.textContent = "Music";
-
-    });
-
+  /* Show main website */
 
   setTimeout(() => {
 
@@ -72,17 +131,30 @@ enterBtn.addEventListener("click", () => {
    SCROLL BUTTON
 ================================= */
 
-document
-  .querySelector(".scroll-next")
-  .addEventListener("click", () => {
+const scrollNext =
+  document.querySelector(".scroll-next");
 
-    document
-      .querySelector(".letter")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
+if (scrollNext) {
 
-  });
+  scrollNext.addEventListener(
+    "click",
+    () => {
+
+      const letter =
+        document.querySelector(".letter");
+
+      if (letter) {
+
+        letter.scrollIntoView({
+          behavior: "smooth"
+        });
+
+      }
+
+    }
+  );
+
+}
 
 
 /* =================================
@@ -90,6 +162,23 @@ document
 ================================= */
 
 function observeReveals() {
+
+  const elements =
+    document.querySelectorAll(".reveal");
+
+
+  if (!("IntersectionObserver" in window)) {
+
+    elements.forEach(element => {
+
+      element.classList.add("visible");
+
+    });
+
+    return;
+
+  }
+
 
   const observer =
     new IntersectionObserver(
@@ -99,9 +188,9 @@ function observeReveals() {
 
           if (entry.isIntersecting) {
 
-            entry.target
-              .classList
-              .add("visible");
+            entry.target.classList.add(
+              "visible"
+            );
 
           }
 
@@ -114,16 +203,18 @@ function observeReveals() {
     );
 
 
-  document
-    .querySelectorAll(".reveal")
-    .forEach(element => {
+  elements.forEach(element => {
 
-      observer.observe(element);
+    observer.observe(element);
 
-    });
+  });
 
 }
 
+
+/* =================================
+   START REVEALS
+================================= */
 
 observeReveals();
 
@@ -139,30 +230,38 @@ function burstHearts(amount = 10) {
     const heart =
       document.createElement("span");
 
+
     heart.className =
       "heart-particle";
 
+
     heart.textContent =
-      Math.random() > .25
+      Math.random() > 0.25
         ? "♥"
         : "✦";
+
 
     heart.style.left =
       Math.random() * 100 + "%";
 
+
     heart.style.bottom =
       (-10 - Math.random() * 15) + "px";
+
 
     heart.style.setProperty(
       "--drift",
       (Math.random() * 180 - 90) + "px"
     );
 
+
     heart.style.animationDelay =
-      Math.random() * .7 + "s";
+      Math.random() * 0.7 + "s";
+
 
     heart.style.fontSize =
       8 + Math.random() * 15 + "px";
+
 
     hearts.appendChild(heart);
 
@@ -178,12 +277,15 @@ function burstHearts(amount = 10) {
 }
 
 
-/* Small hearts occasionally */
+/* =================================
+   SMALL HEARTS
+================================= */
 
 setInterval(() => {
 
   if (
     !document.hidden &&
+    intro &&
     !intro.classList.contains("exit")
   ) {
 
@@ -198,73 +300,98 @@ setInterval(() => {
    BIRTHDAY WISH
 ================================= */
 
-wishBtn.addEventListener("click", () => {
+if (wishBtn) {
 
-  if (
-    wishBtn.classList.contains("done")
-  ) {
+  wishBtn.addEventListener(
+    "click",
+    () => {
 
-    return;
+      if (
+        wishBtn.classList.contains("done")
+      ) {
 
-  }
+        return;
 
-
-  /* Turn off candle */
-
-  flame.style.display = "none";
-
-
-  /* Change button */
-
-  wishBtn.textContent =
-    "Wish made ✨";
-
-  wishBtn.classList.add("done");
+      }
 
 
-  /* Celebration */
+      /* Turn off candle */
 
-  burstHearts(50);
+      if (flame) {
+
+        flame.style.display = "none";
+
+      }
 
 
-  /* Go to final section */
+      /* Change button */
 
-  setTimeout(() => {
+      wishBtn.textContent =
+        "Wish made ✨";
 
-    document
-      .querySelector(".final")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
 
-  }, 1400);
+      wishBtn.classList.add("done");
 
-});
+
+      /* Celebration */
+
+      burstHearts(50);
+
+
+      /* Go to final section */
+
+      setTimeout(() => {
+
+        const finalSection =
+          document.querySelector(".final");
+
+
+        if (finalSection) {
+
+          finalSection.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }
+
+      }, 1400);
+
+    }
+  );
+
+}
 
 
 /* =================================
    REPLAY
 ================================= */
 
-replayBtn.addEventListener("click", () => {
+if (replayBtn) {
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  replayBtn.addEventListener(
+    "click",
+    () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
 
-  setTimeout(() => {
+      setTimeout(() => {
 
-    location.reload();
+        location.reload();
 
-  }, 700);
+      }, 700);
 
-});
+    }
+  );
+
+}
 
 
 /* =================================
-   MUSIC
+   MUSIC CONTROL
 ================================= */
 
 musicControl.addEventListener(
@@ -273,26 +400,31 @@ musicControl.addEventListener(
 
     try {
 
+      /* If music is paused */
+
       if (bgMusic.paused) {
 
         await bgMusic.play();
 
-        musicControl
-          .classList
-          .add("playing");
+        musicControl.classList.add(
+          "playing"
+        );
 
         musicText.textContent =
           "Playing";
 
       }
 
+
+      /* If music is already playing */
+
       else {
 
         bgMusic.pause();
 
-        musicControl
-          .classList
-          .remove("playing");
+        musicControl.classList.remove(
+          "playing"
+        );
 
         musicText.textContent =
           "Music";
@@ -303,8 +435,13 @@ musicControl.addEventListener(
 
     catch (error) {
 
-    musicText.textContent =
-  "Add song.mp3";
+      console.error(
+        "Music control error:",
+        error
+      );
+
+      musicText.textContent =
+        "Music Error";
 
 
       setTimeout(() => {
@@ -317,4 +454,24 @@ musicControl.addEventListener(
     }
 
   }
+);
+
+
+/* =================================
+   DEBUG INFORMATION
+================================= */
+
+console.log(
+  "Music file:",
+  bgMusic.currentSrc
+);
+
+console.log(
+  "Music ready state:",
+  bgMusic.readyState
+);
+
+console.log(
+  "Music network state:",
+  bgMusic.networkState
 );
